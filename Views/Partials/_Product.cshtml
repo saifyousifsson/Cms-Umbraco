@@ -3,24 +3,38 @@
 <section class="__featured-products mt-5">
     <div class="container">
         <div class="row row-cols-1 row-cols-md-4 g-4">
-            <div class="col">
-                <div class="card">
-                    <div class="img">
-                        <img src="/images/card-img.jpg" alt="">
-                        <div class="card-menu">
+              
+       
+                   @{
+                  	var selection = Umbraco.Content(Guid.Parse("3f64978a-cbdc-4c88-bed4-2c2dd2ecd523"))
+                      .ChildrenOfType("ProductItemPage")
+                      .Where(x => x.IsVisible())
+                      .OrderByDescending(x => x.CreateDate);
+                     }
+
+                	@foreach (var item in selection)
+                	{
+                	    var productlImage = item.Value<IPublishedContent>("productImag");
+                	
+                        <div class="card">
+                            <a href="@item.Url()">
+                                <div class="img">
+                                    <img src="@productlImage.Url()"  alt="...">
+                          <div class="card-menu">
                             <a href="#"><i class="fa-regular fa-heart"></i></a>
                             <a href="#"><i class="fa-regular fa-repeat"></i></a>
                             <a href="#"><i class="fa-regular fa-bag-shopping"></i></a>
                         </div>
-                        <a class="__btn-theme btn-card-theme" href="#">
+                         <a class="__btn-theme btn-card-theme" href="#">
                             <span class="__btn-theme-left"></span>
                             <span class="__btn-theme-right"></span>
-                            QUICK VIEW
+                            @item.Name()
                         </a>
+                   
                     </div>
-                    <div class="card-body">
-                        <p class="card-category">Category</p>
-                        <h5 class="card-title">Modern Black Blouse</h5>
+                    <div class="card-body me-2 ">
+                        <p class="card-category ">@item.Value("productCategory")</p>
+                        <h5 class="card-title">@item.Name()</h5>
                         <p class="card-rating">
                             <i class="fa-sharp fa-solid fa-star"></i>
                             <i class="fa-sharp fa-solid fa-star"></i>
@@ -28,213 +42,13 @@
                             <i class="fa-sharp fa-solid fa-star"></i>
                             <i class="fa-sharp fa-solid fa-star"></i>
                         </p>
-                        <p class="card-price">$35.00</p>
+                        <p class="card-price">@item.Value("productPrice")</p>
                     </div>
+                                   
+                                </div>
+                    
+                	}
                 </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="img">
-                        <img src="/images/card-img.jpg" alt="">
-                        <div class="card-menu">
-                            <a href="#"><i class="fa-regular fa-heart"></i></a>
-                            <a href="#"><i class="fa-regular fa-repeat"></i></a>
-                            <a href="#"><i class="fa-regular fa-bag-shopping"></i></a>
-                        </div>
-                        <a class="__btn-theme btn-card-theme" href="#">
-                            <span class="__btn-theme-left"></span>
-                            <span class="__btn-theme-right"></span>
-                            QUICK VIEW
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-category">Category</p>
-                        <h5 class="card-title">Modern Black Blouse</h5>
-                        <p class="card-rating">
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                        </p>
-                        <p class="card-price">$35.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="img">
-                        <img src="/images/card-img.jpg" alt="">
-                        <div class="card-menu">
-                            <a href="#"><i class="fa-regular fa-heart"></i></a>
-                            <a href="#"><i class="fa-regular fa-repeat"></i></a>
-                            <a href="#"><i class="fa-regular fa-bag-shopping"></i></a>
-                        </div>
-                        <a class="__btn-theme btn-card-theme" href="#">
-                            <span class="__btn-theme-left"></span>
-                            <span class="__btn-theme-right"></span>
-                            QUICK VIEW
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-category">Category</p>
-                        <h5 class="card-title">Modern Black Blouse</h5>
-                        <p class="card-rating">
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                        </p>
-                        <p class="card-price">$35.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="img">
-                        <img src="/images/card-img.jpg" alt="">
-                        <div class="card-menu">
-                            <a href="#"><i class="fa-regular fa-heart"></i></a>
-                            <a href="#"><i class="fa-regular fa-repeat"></i></a>
-                            <a href="#"><i class="fa-regular fa-bag-shopping"></i></a>
-                        </div>
-                        <a class="__btn-theme btn-card-theme" href="#">
-                            <span class="__btn-theme-left"></span>
-                            <span class="__btn-theme-right"></span>
-                            QUICK VIEW
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-category">Category</p>
-                        <h5 class="card-title">Modern Black Blouse</h5>
-                        <p class="card-rating">
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                        </p>
-                        <p class="card-price">$35.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="img">
-                        <img src="/images/card-img.jpg" alt="">
-                        <div class="card-menu">
-                            <a href="#"><i class="fa-regular fa-heart"></i></a>
-                            <a href="#"><i class="fa-regular fa-repeat"></i></a>
-                            <a href="#"><i class="fa-regular fa-bag-shopping"></i></a>
-                        </div>
-                        <a class="__btn-theme btn-card-theme" href="#">
-                            <span class="__btn-theme-left"></span>
-                            <span class="__btn-theme-right"></span>
-                            QUICK VIEW
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-category">Category</p>
-                        <h5 class="card-title">Modern Black Blouse</h5>
-                        <p class="card-rating">
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                        </p>
-                        <p class="card-price">$35.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="img">
-                        <img src="/images/card-img.jpg" alt="">
-                        <div class="card-menu">
-                            <a href="#"><i class="fa-regular fa-heart"></i></a>
-                            <a href="#"><i class="fa-regular fa-repeat"></i></a>
-                            <a href="#"><i class="fa-regular fa-bag-shopping"></i></a>
-                        </div>
-                        <a class="__btn-theme btn-card-theme" href="#">
-                            <span class="__btn-theme-left"></span>
-                            <span class="__btn-theme-right"></span>
-                            QUICK VIEW
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-category">Category</p>
-                        <h5 class="card-title">Modern Black Blouse</h5>
-                        <p class="card-rating">
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                        </p>
-                        <p class="card-price">$35.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="img">
-                        <img src="/images/card-img.jpg" alt="">
-                        <div class="card-menu">
-                            <a href="#"><i class="fa-regular fa-heart"></i></a>
-                            <a href="#"><i class="fa-regular fa-repeat"></i></a>
-                            <a href="#"><i class="fa-regular fa-bag-shopping"></i></a>
-                        </div>
-                        <a class="__btn-theme btn-card-theme" href="#">
-                            <span class="__btn-theme-left"></span>
-                            <span class="__btn-theme-right"></span>
-                            QUICK VIEW
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-category">Category</p>
-                        <h5 class="card-title">Modern Black Blouse</h5>
-                        <p class="card-rating">
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                        </p>
-                        <p class="card-price">$35.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="img">
-                        <img src="/images/card-img.jpg" alt="">
-                        <div class="card-menu">
-                            <a href="#"><i class="fa-regular fa-heart"></i></a>
-                            <a href="#"><i class="fa-regular fa-repeat"></i></a>
-                            <a href="#"><i class="fa-regular fa-bag-shopping"></i></a>
-                        </div>
-                        <a class="__btn-theme btn-card-theme" href="#">
-                            <span class="__btn-theme-left"></span>
-                            <span class="__btn-theme-right"></span>
-                            QUICK VIEW
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-category">Category</p>
-                        <h5 class="card-title">Modern Black Blouse</h5>
-                        <p class="card-rating">
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                            <i class="fa-sharp fa-solid fa-star"></i>
-                        </p>
-                        <p class="card-price">$35.00</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>

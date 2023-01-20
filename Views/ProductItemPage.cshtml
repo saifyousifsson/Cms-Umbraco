@@ -1,0 +1,45 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ProductItemPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Layout.cshtml";
+	ViewData["PageTitle"] = @Model.Value("ProductTitle");
+	ViewData["PageDescription"] = @Model.Value("ProductIngress");
+}
+
+<partial name="_Breadcrumb" />
+
+<div class="container mb-5">
+    <div class="">
+        <div class="row">
+
+            <div class="col-8">
+                <h1 class="mb-3">@Model.Value("ProductTitle")</h1>
+
+             
+                
+                <p class="my-5">@Model.Value("ProductText")</p>
+            </div>
+            <div class="col-3 offset-1">
+                <h6>Blog Categories</h6>
+                <hr>
+                <ul class="mb-5">
+                    <li>Accessories</li>
+                    <li>Watch Fashion</li>
+                    <li>Pants & Denim</li>
+                </ul>
+                <h6>Recent Posts</h6>
+                <hr>
+                <ul class="mb-5">
+                    <li>Accessories</li>
+                    <li>Watch Fashion</li>
+                    <li>Pants & Denim</li>
+                </ul>
+            </div>
+        </div>  
+        <div class="row">
+
+        </div>
+    </div>
+    
+</div>

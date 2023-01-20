@@ -1,0 +1,104 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ProductListPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@{
+	Layout = "Layout.cshtml";
+}
+<partial name="_Breadcrumb" />
+
+<div class="featured-blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                @{
+                    var featuredProduct = Model.Value<IPublishedContent>("featuredProduct");
+                    if (featuredProduct != null) 
+                    {
+                        
+                        <a href="@featuredProduct.Url()">
+                     
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            @{ 
+                                                IPublishedContent featuredProductImag = featuredProduct.Value<IPublishedContent>("productImag"); 
+                                            }
+                                            <img src="@featuredProductImag.Url()" class="blog-image">
+                                         
+                                        </div>
+                                        
+                                        <div class="col-7 m-2">
+                                        
+                                          
+                                            <h1>@featuredProduct.Value("ProductTitle")</h1>
+                                            <p>@featuredProduct.Value("productIngress")</p>
+                                            
+                                        </div>
+                                    </div> 
+                                </div>                           
+                            </div>
+                        </a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class=""__featured-products mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Latest Product</h1>
+                <hr>
+                <div class="row row-cols-1 row-cols-md-4 g-4">
+       
+                   @{
+                  	var selection = Umbraco.Content(Guid.Parse("3f64978a-cbdc-4c88-bed4-2c2dd2ecd523"))
+                      .ChildrenOfType("ProductItemPage")
+                      .Where(x => x.IsVisible())
+                      .OrderByDescending(x => x.CreateDate);
+                     }
+
+                	@foreach (var item in selection)
+                	{
+                	    var productlImage = item.Value<IPublishedContent>("productImag");
+                	
+                        <div class="card">
+                            <a href="@item.Url()">
+                                <div class="img">
+                                    <img src="@productlImage.Url()"  alt="...">
+                          <div class="card-menu">
+                            <a href="#"><i class="fa-regular fa-heart"></i></a>
+                            <a href="#"><i class="fa-regular fa-repeat"></i></a>
+                            <a href="#"><i class="fa-regular fa-bag-shopping"></i></a>
+                        </div>
+                         <a class="__btn-theme btn-card-theme" href="#">
+                            <span class="__btn-theme-left"></span>
+                            <span class="__btn-theme-right"></span>
+                            @item.Name()
+                        </a>
+                   
+                    </div>
+                    <div class="card-body me-5 ">
+                        <p class="card-category ">@item.Value("productCategory")</p>
+                        <h5 class="card-title">@item.Name()</h5>
+                        <p class="card-rating">
+                            <i class="fa-sharp fa-solid fa-star"></i>
+                            <i class="fa-sharp fa-solid fa-star"></i>
+                            <i class="fa-sharp fa-solid fa-star"></i>
+                            <i class="fa-sharp fa-solid fa-star"></i>
+                            <i class="fa-sharp fa-solid fa-star"></i>
+                        </p>
+                        <p class="card-price">@item.Value("productPrice")</p>
+                    </div>
+                                   
+                                </div>
+                    
+                	}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
